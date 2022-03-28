@@ -2,9 +2,17 @@ import React from 'react';
 import { mount } from '@cypress/react';
 import App from './App';
 
-
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+it('renders learn react link', () => {
+  mount(<App />);
+  cy.get('a').contains(/Learn react/i);
 });
+
+it('count initialized with 0', () => {
+  mount(<App />);
+  cy.get('[data-cy="count"]').contains('0');
+})
+it('button click increase count by 1', () => {
+  mount(<App />);
+  cy.get('[data-cy="button"]').click();
+  cy.get('[data-cy="count"]').contains('1');
+})
