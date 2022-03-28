@@ -44,8 +44,8 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
       - run: |
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/mon-app-devops:${{ github.sha }}
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/mon-app-devops:${{ github.sha }}
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/monappdevops:${{ github.sha }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/monappdevops:${{ github.sha }}
       
   deploy:
     # The type of runner that the job will run on
@@ -63,7 +63,7 @@ jobs:
         with:
           resource-group: ${{ secrets.RESOURCE_GROUP }}
           dns-name-label: ${{ github.ref_name }}-monappdevops
-          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/mon-app-devops:${{ github.sha }}
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/monappdevops:${{ github.sha }}
           registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           registry-username: ${{ secrets.ACR_USERNAME }}
           registry-password: ${{ secrets.ACR_PASSWORD }}
